@@ -1,14 +1,31 @@
+@use '../styles/vars' as *;
+
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #007aff;
-  color: #fff;
+  background: $white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include tablet-desktop {
+      padding: 0 2rem;
+    }
+  }
 
   &__logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    svg {
+      width: 74px;
+      height: 36px;
+    }
   }
 
   &__nav {
@@ -22,6 +39,44 @@
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include mobile {
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: right;
+    }
+  }
+
+  &__contact-text {
+    @include small-text;
+    color: $gray-600;
+    font-size: 0.75rem;
+
+    @include mobile {
+      font-size: 0.6rem;
+    }
+  }
+
+  &__phone {
+    @include body-text;
+    color: $rimac-black;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    font-size: 0.875rem;
+
+    &:hover {
+      color: $rimac-red;
+    }
+
+    @include mobile {
+      font-size: 0.75rem;
     }
   }
 }
