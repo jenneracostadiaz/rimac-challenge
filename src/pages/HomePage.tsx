@@ -6,8 +6,8 @@ function HomePage() {
     documentType: 'DNI',
     documentNumber: '',
     cellphone: '',
-    privacyPolicy: false,
-    commercialPolicy: false,
+    privacyPolicy: true,
+    commercialPolicy: true,
   })
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -47,20 +47,34 @@ function HomePage() {
             />
           </div>
         </section>
+
         <section className="landing__hero" aria-labelledby="hero-title">
+          <div className="landing__image">
+            <img
+              src="/family-hero.png"
+              alt="Familia feliz: madre, padre e hijo sonriendo juntos en casa, representando la protección familiar que ofrece el seguro de salud"
+              className="landing__hero-img"
+              width="886"
+              height="590"
+              loading="eager"
+            />
+          </div>
+
           <div className="landing__content">
             <div className="landing__badge">
               <span className="landing__badge-text">Seguro Salud Flexible</span>
             </div>
 
-            <h1 id="hero-title" className="landing__title">
-              Creado para ti y tu familia
-            </h1>
+            <div>
+              <h1 id="hero-title" className="landing__title">
+                Creado para ti y tu familia
+              </h1>
 
-            <p className="landing__description">
-              Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría. 100%
-              online.
-            </p>
+              <p className="landing__description">
+                Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra asesoría. 100%
+                online.
+              </p>
+            </div>
 
             <form className="landing__form" onSubmit={handleSubmit} noValidate>
               <div className="landing__form-row">
@@ -83,14 +97,13 @@ function HomePage() {
                 </div>
 
                 <div className="landing__form-group landing__form-group--flex">
-                  <label htmlFor="documentNumber" className="visually-hidden">
-                    Número de documento
+                  <label htmlFor="documentNumber" className="landing__label">
+                    Nro. de documento
                   </label>
                   <input
                     type="text"
                     id="documentNumber"
                     name="documentNumber"
-                    placeholder="Nro. de documento"
                     value={formData.documentNumber}
                     onChange={handleInputChange}
                     className="landing__input"
@@ -105,14 +118,13 @@ function HomePage() {
               </div>
 
               <div className="landing__form-group">
-                <label htmlFor="cellphone" className="visually-hidden">
-                  Número de celular
+                <label htmlFor="cellphone" className="landing__label">
+                  Celular
                 </label>
                 <input
                   type="tel"
                   id="cellphone"
                   name="cellphone"
-                  placeholder="Celular"
                   value={formData.cellphone}
                   onChange={handleInputChange}
                   className="landing__input"
@@ -176,17 +188,6 @@ function HomePage() {
                 Enviar formulario para obtener cotización
               </span>
             </form>
-          </div>
-
-          <div className="landing__image">
-            <img
-              src="/family-hero.png"
-              alt="Familia feliz: madre, padre e hijo sonriendo juntos en casa, representando la protección familiar que ofrece el seguro de salud"
-              className="landing__hero-img"
-              width="886"
-              height="590"
-              loading="eager"
-            />
           </div>
         </section>
       </div>
