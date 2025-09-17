@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { type ChangeEvent, type FormEvent, useState } from 'react'
 import './HomePage.scss'
 
 function HomePage() {
@@ -10,7 +10,7 @@ function HomePage() {
     commercialPolicy: false,
   })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
     setFormData((prev) => ({
       ...prev,
@@ -18,7 +18,7 @@ function HomePage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
   }
@@ -26,6 +26,27 @@ function HomePage() {
   return (
     <main className="landing" role="main">
       <div className="landing__container">
+        <section className="landing__hero_mobile" aria-labelledby="hero-mobile-title">
+          <div className="landing__content_mobile">
+            <div className="landing__badge">
+              <span className="landing__badge-text">Seguro Salud Flexible</span>
+            </div>
+
+            <h1 id="hero-mobile-title" className="landing__title_mobile">
+              Creado para ti y tu familia
+            </h1>
+          </div>
+          <div className="landing__hero_mobile__image">
+            <img
+              src="/family-hero.png"
+              alt="Familia feliz: madre, padre e hijo sonriendo juntos en casa, representando la protección familiar que ofrece el seguro de salud"
+              className="landing__hero_mobile__image-img_mobile"
+              width="886"
+              height="590"
+              loading="eager"
+            />
+          </div>
+        </section>
         <section className="landing__hero" aria-labelledby="hero-title">
           <div className="landing__content">
             <div className="landing__badge">
