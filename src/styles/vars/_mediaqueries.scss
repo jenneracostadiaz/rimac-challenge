@@ -6,13 +6,13 @@ $large-desktop: 1440px;
 
 // Media Query Mixins
 @mixin mobile {
-  @media (max-width: #{$tablet - 1px}) {
+  @media (min-width: #{$tablet - 1px}) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1px}) {
+  @media (min-width: #{$tablet}) {
     @content;
   }
 }
@@ -25,18 +25,6 @@ $large-desktop: 1440px;
 
 @mixin large-desktop {
   @media (min-width: #{$large-desktop}) {
-    @content;
-  }
-}
-
-@mixin mobile-tablet {
-  @media (max-width: #{$desktop - 1px}) {
-    @content;
-  }
-}
-
-@mixin tablet-desktop {
-  @media (min-width: #{$tablet}) {
     @content;
   }
 }

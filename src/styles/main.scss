@@ -44,7 +44,7 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
 
-  @include vars.tablet-desktop {
+  @include vars.tablet {
     padding: 0 2rem;
   }
 }
