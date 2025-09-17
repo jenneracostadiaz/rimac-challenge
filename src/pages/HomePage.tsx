@@ -1,4 +1,5 @@
 import { useUser } from '../services/userService'
+import './HomePage.scss'
 
 function HomePage() {
   const { data, isLoading, isError } = useUser()
