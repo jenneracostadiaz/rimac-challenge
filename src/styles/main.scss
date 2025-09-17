@@ -1,0 +1,29 @@
+// Variables globales
+$primary: #007aff;
+$font-stack: 'Inter', sans-serif;
+
+// Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-stack;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+// Ejemplo BEM
+.home {
+  &__title {
+    font-size: 2rem;
+    color: $primary;
+  }
+
+  &__text {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+}
