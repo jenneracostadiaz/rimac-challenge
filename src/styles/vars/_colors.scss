@@ -8,4 +8,35 @@ $cGray100: #03050F;
 $cGray60: #5E6488;
 $cRed: #F7052D;
 
+// Rimac Brand Colors
+$rimac-red: #F7052D;
+$rimac-blue: #007AFF;
+$rimac-dark: #0A051E;
+$rimac-black: #232426;
+
+// UI Colors
+$white: #FFFFFF;
+$gray-100: #F8F9FA;
+$gray-200: #F5F5F5;
+$gray-300: #E9ECEF;
+$gray-400: #CED4DA;
+$gray-500: #ADB5BD;
+$gray-600: #6C757D;
+$gray-700: #495057;
+$gray-800: #343A40;
+$gray-900: #212529;
+
+// Accent Colors
+$green-accent: #00D4AA;
+$success: #28A745;
+$warning: #FFC107;
+$danger: #DC3545;
+$info: #17A2B8;
+
+// Backgrounds
+$bg-primary: $white;
+$bg-secondary: $gray-100;
+$bg-dark: $rimac-dark;
+$bg-footer: $rimac-dark;
+
 $gL01: linear-gradient(90deg, $cBlurAsset02, $cBlurAsset02-80);

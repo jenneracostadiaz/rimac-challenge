@@ -1,94 +1,58 @@
 @use '../vars/mediaqueries' as *;
 
-$ffBrSonoma: 'BR Sonoma', serif;
-$fsBase: 16px;
-$lhBase: 1.5;
-$fwRegular: 400;
-$fwMedium: 500;
-$fwSemiBold: 600;
-$fwBold: 700;
-$fwBlack: 900;
+// Typography System
+$font-family-primary: 'BR Sonoma', sans-serif;
+$font-family-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-@mixin H1-SemiBold48 {
-  font-family: $ffBrSonoma;
-  font-size: 48px;
-  line-height: 56px;
-  font-weight: $fwSemiBold;
-  margin: 0;
-  @include phone() {
-    font-size: 36px;
-    line-height: 44px;
-  }
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// Font Sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+
+// Line Heights
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Typography Mixins
+@mixin heading-1 {
+  font-family: $font-family-primary, $font-family-fallback;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
 }
 
-@mixin H2-SemiBold40 {
-  font-family: $ffBrSonoma;
-  font-size: 40px;
-  line-height: 48px;
-  font-weight: $fwSemiBold;
-  margin: 0;
-  @include phone() {
-    font-size: 32px;
-    line-height: 40px;
-  }
+@mixin heading-2 {
+  font-family: $font-family-primary, $font-family-fallback;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
 }
 
-@mixin H3-SemiBold36 {
-  font-family: $ffBrSonoma;
-  font-size: 36px;
-  line-height: 44px;
-  font-weight: $fwSemiBold;
-  margin: 0;
-  @include phone() {
-    font-size: 28px;
-    line-height: 36px;
-  }
+@mixin body-text {
+  font-family: $font-family-primary, $font-family-fallback;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
 }
 
-@mixin H4-SemiBold32 {
-  font-family: $ffBrSonoma;
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: $fwSemiBold;
-  margin: 0;
-  @include phone() {
-    font-size: 24px;
-    line-height: 32px;
-  }
-}
-
-@mixin H5-SemiBold24 {
-  font-family: $ffBrSonoma;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: $fwSemiBold;
-  margin: 0;
-  @include phone() {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-
-@mixin H6-SemiBold20 {
-  font-family: $ffBrSonoma;
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: $fwSemiBold;
-  margin: 0;
-  @include phone() {
-    font-size: 18px;
-    line-height: 24px;
-  }
-}
-
-@mixin Body-Regular17 {
-  font-family: $ffBrSonoma;
-  font-size: 17px;
-  line-height: 26px;
-  font-weight: $fwRegular;
-  margin: 0;
-  @include phone() {
-    font-size: 16px;
-    line-height: 24px;
-  }
+@mixin small-text {
+  font-family: $font-family-primary, $font-family-fallback;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
 }

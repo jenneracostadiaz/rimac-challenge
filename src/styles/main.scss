@@ -1,4 +1,93 @@
+// Import all style modules
 @use 'fonts';
 @use 'vars';
 @use 'globals';
 
+// Base styles
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* Now 10px = 1rem! */
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  outline: none;
+}
+
+body {
+  font-family: vars.$font-family-primary, vars.$font-family-fallback;
+  font-size: vars.$font-size-base;
+  line-height: vars.$line-height-normal;
+  margin: 0;
+  padding: 0;
+  background-color: vars.$bg-primary;
+  color: vars.$rimac-black;
+  transition: all 0.5s;
+}
+
+// Utility classes
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @include vars.tablet-desktop {
+    padding: 0 2rem;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a{
+    text-decoration: none;
+    color: vars.$cGray100;
+    &:hover {
+        color: vars.$cBlurAsset01;
+        cursor: pointer;
+    }
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input[type='submit'] {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.svg-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
