@@ -3,33 +3,63 @@
 @use '../styles/vars/colors' as *;
 
 .footer {
-  background: $bg-dark;
-  padding: 2rem 0;
+  background: $cGray100;
 
   &__container {
-    max-width: 1200px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 0 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 3.2rem 2.4rem;
 
     @include tablet {
-      padding: 0 2rem;
+      flex-direction: row;
+      padding: 3.2rem 0;
     }
   }
 
   &__logo {
-    svg {
-      width: 74px;
-      height: 36px;
+    color: $white;
+
+    &__svg{
+      &_mobile{
+        display: block;
+        width: 13.8rem;
+        height: 2rem;
+        @include tablet {
+          display: none;
+        }
+      }
+      &_desktop{
+          display: none;
+          @include tablet {
+          display: block;
+          }
+      }
     }
   }
 
   &__text {
-    @include small-text;
-    color: $white;
-    margin: 0;
-    font-size: $font-size-sm;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    letter-spacing: 0.1rem;
+    color: $cGray00;
+    font-weight: $font-weight-light;
+    border-top: 1px solid $gray-700;
+    width: 100%;
+    text-align: center;
+    padding-top: 2.4rem;
+    margin: 2.4rem 0 0;
+
+    @include tablet {
+      text-align: right;
+      border: none;
+      padding-top: 0;
+      margin: 0;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+    }
   }
 }
