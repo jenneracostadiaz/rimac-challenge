@@ -1,1 +1,5 @@
-@import 'colors', 'typography',  'displays', 'mediaqueries';
+@forward 'colors';
+@forward 'typography';
+@forward 'displays';
+@forward 'mediaqueries';
+

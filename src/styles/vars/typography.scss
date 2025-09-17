@@ -1,4 +1,4 @@
-@import '../vars/mediaqueries';
+@use '../vars/mediaqueries' as *;
 
 $ffBrSonoma: 'BR Sonoma', serif;
 $fsBase: 16px;

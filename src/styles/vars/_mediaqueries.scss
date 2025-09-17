@@ -1,4 +1,4 @@
-@import '../vars/displays';
+@use '../vars/displays' as *;
 
 @mixin minScreen {
   @media only screen and (min-width: $d-minScreen) {

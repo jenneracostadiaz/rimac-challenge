@@ -1,5 +1,5 @@
-@import '../vars/colors';
-@import '../vars/typography';
+@use '../vars/colors' as *;
+@use '../vars/typography' as *;
 
 html {
   box-sizing: border-box;
