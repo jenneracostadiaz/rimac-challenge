@@ -23,8 +23,8 @@
   &__logo {
     color: $white;
 
-    &__svg{
-      &_mobile{
+    &__svg {
+      &_mobile {
         display: block;
         width: 13.8rem;
         height: 2rem;
@@ -32,11 +32,11 @@
           display: none;
         }
       }
-      &_desktop{
-          display: none;
-          @include tablet {
+      &_desktop {
+        display: none;
+        @include tablet {
           display: block;
-          }
+        }
       }
     }
   }
