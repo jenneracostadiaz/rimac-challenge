@@ -7,20 +7,20 @@ export default function PlansPage() {
       <nav className="plans-steps desktop" aria-label="Progreso de cotización">
         <ol className="plans-steps__list">
           <li className="plans-steps__item plans-steps__item--active" aria-current="step">
-            <span className="plans-steps__circle">1</span>
+            <span className="plans-steps__item--active__circle">1</span>
             <span>Planes y coberturas</span>
           </li>
           <li className="plans-steps__item">
-            <span className="plans-steps__circle">2</span>
+            <span className="plans-steps__item__circle">2</span>
             <span>Resumen</span>
           </li>
         </ol>
       </nav>
       <div className="plans-back desktop">
-        <button className="plans-back__btn" aria-label="Volver">
-          <img src="#" alt="" aria-hidden="true" className="plans-back__icon" />
+        <a href="/" className="plans-back__btn" aria-label="Volver">
+          <ArrowLeft />
           Volver
-        </button>
+        </a>
       </div>
       <nav className="plans-steps mobile" aria-label="Progreso de cotización">
         <ArrowLeft />
