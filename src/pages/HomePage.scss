@@ -139,6 +139,13 @@
       }
     }
   }
+  &__form-error{
+    color: $cRed;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    margin-top: -0.8rem;
+    margin-bottom: 0.8rem;
+  }
 
   &__select {
     width: 100%;
