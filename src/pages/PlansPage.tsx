@@ -23,7 +23,9 @@ export default function PlansPage() {
         </a>
       </div>
       <nav className="plans-steps mobile" aria-label="Progreso de cotización">
-        <ArrowLeft />
+        <a href="/">
+          <ArrowLeft />
+        </a>
         <span className="plans-steps__step mobile" aria-label="Paso 1 de 2">
           Paso 1 de 2
         </span>
