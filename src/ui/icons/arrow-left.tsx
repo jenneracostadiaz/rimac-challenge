@@ -7,7 +7,7 @@ export const ArrowLeft = ({ ...props }) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <g clip-path="url(#clip0_26010_567)">
+    <g clipPath="url(#clip0_26010_567)">
       <circle cx="12" cy="12" r="11" stroke="#A9AFD9" stroke-width="2" />
       <path
         d="M12.9715 15.9037L9.06396 11.9999L12.9715 8.09619L14.029 9.15369L11.1865 11.9999L14.029 14.8462L12.9715 15.9037Z"
