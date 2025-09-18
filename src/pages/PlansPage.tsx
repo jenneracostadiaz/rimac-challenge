@@ -30,7 +30,7 @@ export default function PlansPage() {
         <span className="plans-steps__progress-bar mobile" aria-hidden="true"></span>
       </nav>
       <section className="plans-header" aria-labelledby="plans-title">
-        <h1 id="plans-title" className="plans-title">
+        <h1 id="plans-title" className="plans-header__title">
           Rocío <span className="plans-title__question">¿Para quién deseas cotizar?</span>
         </h1>
         <p className="plans-header__subtitle">
