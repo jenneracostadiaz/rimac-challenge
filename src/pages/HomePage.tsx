@@ -20,7 +20,7 @@ function HomePage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
+    window.location.assign('/plans')
   }
 
   return (
