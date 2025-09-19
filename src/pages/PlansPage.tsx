@@ -122,10 +122,10 @@ export default function PlansPage() {
         <div className="plans-list__swiper">
           {!loading && !error && (
             <Swiper
-              spaceBetween={32}
+              spaceBetween={16}
               slidesPerView={1.1}
               breakpoints={{
-                768: { slidesPerView: 3 },
+                768: { slidesPerView: 3.12, spaceBetween: 32 },
               }}
               aria-label="Planes disponibles"
             >
