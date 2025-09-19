@@ -7,22 +7,57 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import 'swiper/css'
+import { useNavigate } from 'react-router-dom'
 
 interface Plan {
   name: string
   price: number
   description: string[]
+  age: number
+}
+
+interface User {
+  name: string
+  lastName: string
+  birthDay: string
 }
 
 export default function PlansPage() {
-  const [selectedOption, setSelectedOption] = useState('forMe')
+  const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [plans, setPlans] = useState<Plan[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [user, setUser] = useState<User | null>(null)
+  const [userLoading, setUserLoading] = useState(true)
+  const [userError, setUserError] = useState<string | null>(null)
+  const navigate = useNavigate()
 
-  const handleOptionChange = (option: string) => {
-    setSelectedOption(option)
+  const getAge = (birthDay: string) => {
+    const [day, month, year] = birthDay.split('-').map(Number)
+    const today = new Date()
+    let age = today.getFullYear() - year
+    if (today.getMonth() + 1 < month || (today.getMonth() + 1 === month && today.getDate() < day)) {
+      age--
+    }
+    return age
   }
+
+  useEffect(() => {
+    setUserLoading(true)
+    fetch('https://rimac-front-end-challenge.netlify.app/api/user.json')
+      .then((res) => {
+        if (!res.ok) throw new Error('Error fetching user')
+        return res.json()
+      })
+      .then((data) => {
+        setUser(data)
+        setUserError(null)
+      })
+      .catch(() => {
+        setUserError('No se pudieron cargar los datos del usuario.')
+      })
+      .finally(() => setUserLoading(false))
+  }, [])
 
   useEffect(() => {
     setLoading(true)
@@ -40,6 +75,31 @@ export default function PlansPage() {
       })
       .finally(() => setLoading(false))
   }, [])
+
+  const shouldShowPlans = selectedOption && user && !userLoading && !userError
+
+  const userAge = user ? getAge(user.birthDay) : null
+  const filteredPlans = userAge !== null ? plans.filter((plan) => userAge <= plan.age) : []
+
+  const getPlanPrice = (plan: Plan) => {
+    if (selectedOption === 'forSomeoneElse') {
+      return (plan.price * 0.95).toFixed(2)
+    }
+    return plan.price.toFixed(2)
+  }
+
+  const handleSelectPlan = (plan: Plan) => {
+    const selectedPlan = {
+      ...plan,
+      finalPrice: getPlanPrice(plan),
+      selectedOption,
+      userName: user?.name,
+      userLastName: user?.lastName,
+      userAge,
+    }
+    localStorage.setItem('selectedPlan', JSON.stringify(selectedPlan))
+    navigate('/summary')
+  }
 
   return (
     <main className="plans-main" aria-labelledby="plans-title">
@@ -72,7 +132,8 @@ export default function PlansPage() {
       </nav>
       <section className="plans-header" aria-labelledby="plans-title">
         <h1 id="plans-title" className="plans-header__title">
-          Rocío <span className="plans-title__question">¿Para quién deseas cotizar?</span>
+          {user ? user.name : '...'}{' '}
+          <span className="plans-title__question">¿Para quién deseas cotizar?</span>
         </h1>
         <p className="plans-header__subtitle">
           Selecciona la opción que se ajuste más a tus necesidades.
@@ -83,7 +144,7 @@ export default function PlansPage() {
             tabIndex={0}
             aria-checked={selectedOption === 'forMe'}
             role="radio"
-            onClick={() => handleOptionChange('forMe')}
+            onClick={() => setSelectedOption('forMe')}
           >
             <span className="plans-option__check"></span>
             <div className="plans-option__info">
@@ -101,7 +162,7 @@ export default function PlansPage() {
             tabIndex={0}
             aria-checked={selectedOption === 'forSomeoneElse'}
             role="radio"
-            onClick={() => handleOptionChange('forSomeoneElse')}
+            onClick={() => setSelectedOption('forSomeoneElse')}
           >
             <span className="plans-option__check"></span>
             <div className="plans-option__info">
@@ -117,10 +178,10 @@ export default function PlansPage() {
         </div>
       </section>
       <section className="plans-list" aria-label="Planes disponibles">
-        {loading && <div className="plans-list__loading">Cargando planes...</div>}
-        {error && <div className="plans-list__error">{error}</div>}
+        {(loading || userLoading) && <div className="plans-list__loading">Cargando planes...</div>}
+        {(error || userError) && <div className="plans-list__error">{error || userError}</div>}
         <div className="plans-list__swiper">
-          {!loading && !error && (
+          {shouldShowPlans && !loading && !error && !userLoading && !userError && (
             <Swiper
               spaceBetween={16}
               slidesPerView={1.1}
@@ -129,7 +190,7 @@ export default function PlansPage() {
               }}
               aria-label="Planes disponibles"
             >
-              {plans.map((plan, idx) => (
+              {filteredPlans.map((plan, idx) => (
                 <SwiperSlide key={plan.name}>
                   <article
                     className={`plan-card${idx === 1 ? ' plan-card--recommended' : ''}`}
@@ -143,14 +204,19 @@ export default function PlansPage() {
                     <h2 className="plan-card__title">{plan.name}</h2>
                     <div className="plan-card__price">
                       <span className="plan-card__price-label">Costo del plan</span>
-                      <span className="plan-card__price-value">${plan.price} al mes</span>
+                      <span className="plan-card__price-value">${getPlanPrice(plan)} al mes</span>
+                      {selectedOption === 'forSomeoneElse' && (
+                        <span className="plan-card__discount">(5% dscto.)</span>
+                      )}
                     </div>
                     <ul className="plan-card__features">
                       {plan.description.map((desc: string, i: number) => (
                         <li key={i}>{desc}</li>
                       ))}
                     </ul>
-                    <button className="plan-card__select">Seleccionar Plan</button>
+                    <button className="plan-card__select" onClick={() => handleSelectPlan(plan)}>
+                      Seleccionar Plan
+                    </button>
                   </article>
                 </SwiperSlide>
               ))}
