@@ -2,8 +2,15 @@ import './PlansPage.scss'
 import { ArrowLeft } from '../ui/icons/arrow-left.tsx'
 import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
 import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
+import { useState } from 'react'
 
 export default function PlansPage() {
+  const [selectedOption, setSelectedOption] = useState('forMe')
+
+  const handleOptionChange = (option: string) => {
+    setSelectedOption(option)
+  }
+
   return (
     <main className="plans-main" aria-labelledby="plans-title">
       <nav className="plans-steps desktop" aria-label="Progreso de cotización">
@@ -41,7 +48,13 @@ export default function PlansPage() {
           Selecciona la opción que se ajuste más a tus necesidades.
         </p>
         <div className="plans-options" role="radiogroup" aria-label="Opciones de cotización">
-          <label className="plans-option" tabIndex={0} aria-checked="true" role="radio">
+          <label
+            className="plans-option"
+            tabIndex={0}
+            aria-checked={selectedOption === 'forMe'}
+            role="radio"
+            onClick={() => handleOptionChange('forMe')}
+          >
             <span className="plans-option__check"></span>
             <div className="plans-option__info">
               <div className="plans-option__icon">
@@ -53,7 +66,13 @@ export default function PlansPage() {
               Cotiza tu seguro de salud y agrega familiares si así lo deseas.
             </p>
           </label>
-          <label className="plans-option" tabIndex={0} aria-checked="false" role="radio">
+          <label
+            className="plans-option"
+            tabIndex={0}
+            aria-checked={selectedOption === 'forSomeoneElse'}
+            role="radio"
+            onClick={() => handleOptionChange('forSomeoneElse')}
+          >
             <span className="plans-option__check"></span>
             <div className="plans-option__info">
               <div className="plans-option__icon">
