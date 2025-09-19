@@ -1,71 +1,20 @@
-import { type ChangeEvent, type FormEvent, useState } from 'react'
 import './HomePage.scss'
+import { useForm } from '../hooks/useForm.ts'
+import { useFormValidation } from '../hooks/useFormValidation.ts'
+import { useFormSubmission } from '../hooks/useFormSubmission.ts'
+import type { FormEvent } from 'react'
 
 function HomePage() {
-  const [formData, setFormData] = useState({
-    documentType: 'DNI',
-    documentNumber: '',
-    cellphone: '',
-    privacyPolicy: true,
-    commercialPolicy: true,
-  })
-  const [error, setError] = useState<string | null>(null)
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }))
-    setError(null)
-  }
+  const { formData, handleInputChange } = useForm()
+  const { error, validateForm } = useFormValidation()
+  const { submitForm } = useFormSubmission()
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    const errors: string[] = []
-    if (!formData.documentNumber.trim()) {
-      errors.push('El número de documento es obligatorio.')
+    if (validateForm(formData)) {
+      submitForm(formData)
     }
-    if (!formData.cellphone.trim()) {
-      errors.push('El número de celular es obligatorio.')
-    }
-    if (formData.documentType === 'DNI' && !/^\d{8}$/.test(formData.documentNumber)) {
-      errors.push('El número de DNI debe tener 8 dígitos.')
-    }
-    if (formData.documentType === 'CE' && !/^[A-Za-z0-9]{9}$/.test(formData.documentNumber)) {
-      errors.push('El número de CE debe tener 9 caracteres alfanuméricos.')
-    }
-    if (formData.documentType === 'RUC' && !/^\d{11}$/.test(formData.documentNumber)) {
-      errors.push('El número de RUC debe tener 11 dígitos.')
-    }
-    if (!/^\d{9}$/.test(formData.cellphone)) {
-      errors.push('El número de celular debe tener 9 dígitos.')
-    }
-    if (!formData.privacyPolicy) {
-      errors.push('Debe aceptar la Política de Privacidad.')
-    }
-    if (!formData.commercialPolicy) {
-      errors.push('Debe aceptar la Política de Comunicaciones Comerciales.')
-    }
-
-    if (errors.length > 0) {
-      setError(errors.join(' '))
-      return
-    }
-
-    setError(null)
-
-    localStorage.setItem(
-      'userFormData',
-      JSON.stringify({
-        documentType: formData.documentType,
-        documentNumber: formData.documentNumber,
-        cellphone: formData.cellphone,
-      })
-    )
-
-    window.location.assign('/plans')
   }
 
   return (
