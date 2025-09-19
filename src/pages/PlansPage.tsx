@@ -2,14 +2,40 @@ import './PlansPage.scss'
 import { ArrowLeft } from '../ui/icons/arrow-left.tsx'
 import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
 import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+interface Plan {
+  name: string
+  price: number
+  description: string[]
+}
 
 export default function PlansPage() {
   const [selectedOption, setSelectedOption] = useState('forMe')
+  const [plans, setPlans] = useState<Plan[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option)
   }
+
+  useEffect(() => {
+    setLoading(true)
+    fetch('https://rimac-front-end-challenge.netlify.app/api/plans.json')
+      .then((res) => {
+        if (!res.ok) throw new Error('Error fetching plans')
+        return res.json()
+      })
+      .then((data) => {
+        setPlans(data.list)
+        setError(null)
+      })
+      .catch(() => {
+        setError('No se pudieron cargar los planes. Intenta nuevamente.')
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
   return (
     <main className="plans-main" aria-labelledby="plans-title">
@@ -87,62 +113,35 @@ export default function PlansPage() {
         </div>
       </section>
       <section className="plans-list" aria-label="Planes disponibles">
+        {loading && <div className="plans-list__loading">Cargando planes...</div>}
+        {error && <div className="plans-list__error">{error}</div>}
         <div className="plans-list__grid">
-          <article className="plan-card" tabIndex={0} aria-label="Plan en Casa">
-            <div className="plan-card__icon">
-              <img src="#" alt="" />
-            </div>
-            <h2 className="plan-card__title">Plan en Casa</h2>
-            <div className="plan-card__price">
-              <span className="plan-card__price-label">Costo del plan</span>
-              <span className="plan-card__price-value">$39 al mes</span>
-            </div>
-            <ul className="plan-card__features">
-              <li>Médico general a domicilio por S/20 y medicinas cubiertas al 100%.</li>
-              <li>
-                Videoconsulta y orientación telefónica al 100% en medicina general + pediatría.
-              </li>
-              <li>Indemnización de S/300 en caso de hospitalización por más de un día.</li>
-            </ul>
-            <button className="plan-card__select">Seleccionar Plan</button>
-          </article>
-          <article
-            className="plan-card plan-card--recommended"
-            tabIndex={0}
-            aria-label="Plan en Casa y Clínica"
-          >
-            <div className="plan-card__recommended">Plan recomendado</div>
-            <div className="plan-card__icon">
-              <img src="#" alt="" />
-            </div>
-            <h2 className="plan-card__title">Plan en Casa y Clínica</h2>
-            <div className="plan-card__price">
-              <span className="plan-card__price-label">Costo del plan</span>
-              <span className="plan-card__price-value">$99 al mes</span>
-            </div>
-            <ul className="plan-card__features">
-              <li>Consultas en clínica para cualquier especialidad.</li>
-              <li>Medicinas y exámenes derivados cubiertos al 80%.</li>
-              <li>Atención médica en más de 200 clínicas del país.</li>
-            </ul>
-            <button className="plan-card__select">Seleccionar Plan</button>
-          </article>
-          <article className="plan-card" tabIndex={0} aria-label="Plan en Casa + Chequeo">
-            <div className="plan-card__icon">
-              <img src="#" alt="" />
-            </div>
-            <h2 className="plan-card__title">Plan en Casa + Chequeo</h2>
-            <div className="plan-card__price">
-              <span className="plan-card__price-label">Costo del plan</span>
-              <span className="plan-card__price-value">$49 al mes</span>
-            </div>
-            <ul className="plan-card__features">
-              <li>Un Chequeo preventivo general de manera presencial o virtual.</li>
-              <li>Acceso a Vacunas en el Programa del MINSA en centros privados.</li>
-              <li>Incluye todos los beneficios del Plan en Casa.</li>
-            </ul>
-            <button className="plan-card__select">Seleccionar Plan</button>
-          </article>
+          {!loading &&
+            !error &&
+            plans.map((plan, idx) => (
+              <article
+                key={plan.name}
+                className={`plan-card${idx === 1 ? ' plan-card--recommended' : ''}`}
+                tabIndex={0}
+                aria-label={plan.name}
+              >
+                {idx === 2 && <div className="plan-card__recommended">Plan recomendado</div>}
+                <div className="plan-card__icon">
+                  <img src="#" alt="" />
+                </div>
+                <h2 className="plan-card__title">{plan.name}</h2>
+                <div className="plan-card__price">
+                  <span className="plan-card__price-label">Costo del plan</span>
+                  <span className="plan-card__price-value">${plan.price} al mes</span>
+                </div>
+                <ul className="plan-card__features">
+                  {plan.description.map((desc: string, i: number) => (
+                    <li key={i}>{desc}</li>
+                  ))}
+                </ul>
+                <button className="plan-card__select">Seleccionar Plan</button>
+              </article>
+            ))}
         </div>
       </section>
     </main>
