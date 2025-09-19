@@ -10,6 +10,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 // @ts-expect-error
 import 'swiper/css'
 import { useNavigate } from 'react-router-dom'
+import { Steps, StepsMobile } from '../components/Steps.tsx'
+import { Back } from '../components/Back.tsx'
 
 interface Plan {
   name: string
@@ -105,33 +107,9 @@ export default function PlansPage() {
 
   return (
     <main className="plans-main" aria-labelledby="plans-title">
-      <nav className="plans-steps desktop" aria-label="Progreso de cotización">
-        <ol className="plans-steps__list">
-          <li className="plans-steps__item plans-steps__item--active" aria-current="step">
-            <span className="plans-steps__item--active__circle">1</span>
-            <span>Planes y coberturas</span>
-          </li>
-          <li className="plans-steps__item">
-            <span className="plans-steps__item__circle">2</span>
-            <span>Resumen</span>
-          </li>
-        </ol>
-      </nav>
-      <div className="plans-back desktop">
-        <a href="/" className="plans-back__btn" aria-label="Volver">
-          <ArrowLeft />
-          Volver
-        </a>
-      </div>
-      <nav className="plans-steps mobile" aria-label="Progreso de cotización">
-        <a href="/">
-          <ArrowLeft />
-        </a>
-        <span className="plans-steps__step mobile" aria-label="Paso 1 de 2">
-          Paso 1 de 2
-        </span>
-        <span className="plans-steps__progress-bar mobile" aria-hidden="true"></span>
-      </nav>
+      <Steps currentStep={1} />
+      <Back href="/" />
+      <StepsMobile currentStep={1} />
       <section className="plans-header" aria-labelledby="plans-title">
         <h1 id="plans-title" className="plans-header__title">
           {user ? user.name : '...'}{' '}
