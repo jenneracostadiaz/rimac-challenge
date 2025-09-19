@@ -56,7 +56,6 @@ function HomePage() {
 
     setError(null)
 
-    // Guardar los datos del formulario en localStorage
     localStorage.setItem(
       'userFormData',
       JSON.stringify({
