@@ -1,5 +1,4 @@
 import './PlansPage.scss'
-import { ArrowLeft } from '../ui/icons/arrow-left.tsx'
 import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
 import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
 import { IcHomeLight } from '../ui/icons/IcHomeLight.tsx'
