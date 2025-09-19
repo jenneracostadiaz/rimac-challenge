@@ -1,6 +1,6 @@
-@import '../styles/vars/colors';
-@import '../styles/vars/typography';
-@import '../styles/vars/mediaqueries';
+@use '../styles/vars/colors' as *;
+@use '../styles/vars/typography' as *;
+@use '../styles/vars/mediaqueries' as *;
 
 .back{
   display: none;

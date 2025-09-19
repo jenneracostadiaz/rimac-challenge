@@ -1,6 +1,6 @@
 @use '../styles/vars/colors' as *;
-@use '../styles/vars/mediaqueries' as *;
 @use '../styles/vars/typography' as *;
+@use '../styles/vars/mediaqueries' as *;
 
 .landing {
   min-height: calc(100vh - (60px + 129px));
