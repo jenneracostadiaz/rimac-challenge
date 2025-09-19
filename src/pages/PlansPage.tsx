@@ -1,5 +1,7 @@
 import './PlansPage.scss'
 import { ArrowLeft } from '../ui/icons/arrow-left.tsx'
+import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
+import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
 
 export default function PlansPage() {
   return (
@@ -39,29 +41,29 @@ export default function PlansPage() {
           Selecciona la opción que se ajuste más a tus necesidades.
         </p>
         <div className="plans-options" role="radiogroup" aria-label="Opciones de cotización">
-          <label className="plans-option" tabIndex={0} aria-checked="false" role="radio">
-            <div className="plans-option__icon">
-              <img src="#" alt="" />
-            </div>
-            <div className="plans-option__info">
-              <span className="plans-option__title">Para mí</span>
-              <span className="plans-option__desc">
-                Cotiza tu seguro de salud y agrega familiares si así lo deseas.
-              </span>
-            </div>
+          <label className="plans-option" tabIndex={0} aria-checked="true" role="radio">
             <span className="plans-option__check"></span>
+            <div className="plans-option__info">
+              <div className="plans-option__icon">
+                <IcProtectionLight />
+              </div>
+              <h3 className="plans-option__title">Para mí</h3>
+            </div>
+            <p className="plans-option__desc">
+              Cotiza tu seguro de salud y agrega familiares si así lo deseas.
+            </p>
           </label>
           <label className="plans-option" tabIndex={0} aria-checked="false" role="radio">
-            <div className="plans-option__icon">
-              <img src="#" alt="" />
-            </div>
-            <div className="plans-option__info">
-              <span className="plans-option__title">Para alguien más</span>
-              <span className="plans-option__desc">
-                Realiza una cotización para uno de tus familiares o cualquier persona.
-              </span>
-            </div>
             <span className="plans-option__check"></span>
+            <div className="plans-option__info">
+              <div className="plans-option__icon">
+                <IcAddUserLight />
+              </div>
+              <h3 className="plans-option__title">Para alguien más</h3>
+            </div>
+            <p className="plans-option__desc">
+              Realiza una cotización para uno de tus familiares o cualquier persona.
+            </p>
           </label>
         </div>
       </section>
