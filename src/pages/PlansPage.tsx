@@ -200,20 +200,24 @@ export default function PlansPage() {
                     aria-label={plan.name}
                   >
                     {idx === 1 && <div className="plan-card__recommended">Plan recomendado</div>}
-                    <div className="plan-card__icon">
-                      {plan.name === 'Plan en Casa y Clínica' ? (
-                        <IcHospitalLight />
-                      ) : (
-                        <IcHomeLight />
-                      )}
+                    <div className="plan-card__header">
+                      <h2 className="plan-card__title">{plan.name}</h2>
+                      <div className="plan-card__icon">
+                        {plan.name === 'Plan en Casa y Clínica' ? (
+                          <IcHospitalLight />
+                        ) : (
+                          <IcHomeLight />
+                        )}
+                      </div>
                     </div>
-                    <h2 className="plan-card__title">{plan.name}</h2>
                     <div className="plan-card__price">
                       <span className="plan-card__price-label">Costo del plan</span>
-                      <span className="plan-card__price-value">${getPlanPrice(plan)} al mes</span>
                       {selectedOption === 'forSomeoneElse' && (
-                        <span className="plan-card__discount">(5% dscto.)</span>
+                        <span className="plan-card__price-discount">
+                          <s>${plan.price.toFixed(2)}</s>
+                        </span>
                       )}
+                      <span className="plan-card__price-value">${getPlanPrice(plan)} al mes</span>
                     </div>
                     <ul className="plan-card__features">
                       {plan.description.map((desc: string, i: number) => (
