@@ -15,14 +15,14 @@
 
 .summary-content {
   width: 90%;
-  max-width: $tablet;
+  max-width: $desktop;
   margin: 2rem auto 0;
   padding: 0 2.4rem;
 }
 
 .summary-title {
   color: $neutrals-700;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   line-height: 36px;
   letter-spacing: -0.2px;
@@ -32,7 +32,6 @@
     font-size: 40px;
     line-height: 48px;
     letter-spacing: -0.6px;
-    text-align: center;
   }
 }
 
