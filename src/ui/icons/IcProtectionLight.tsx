@@ -24,8 +24,8 @@ export const IcProtectionLight = ({ ...props }) => (
         y2="49.3152"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.272135" stop-color="#34263B" />
-        <stop offset="0.658079" stop-color="#13172C" />
+        <stop offset="0.272135" stopColor="#34263B" />
+        <stop offset="0.658079" stopColor="#13172C" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_12_156287"
@@ -35,8 +35,8 @@ export const IcProtectionLight = ({ ...props }) => (
         y2="36.5807"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.35" stop-color="#F7052D" />
-        <stop offset="0.85" stop-color="#CA5AFA" />
+        <stop offset="0.35" stopColor="#F7052D" />
+        <stop offset="0.85" stopColor="#CA5AFA" />
       </linearGradient>
     </defs>
   </svg>
