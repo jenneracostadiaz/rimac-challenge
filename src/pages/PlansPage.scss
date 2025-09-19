@@ -282,10 +282,6 @@
 
   & .swiper {
     padding: 2rem;
-    @include tablet {
-      //padding: 0;
-      //overflow: visible;
-    }
   }
 }
 
