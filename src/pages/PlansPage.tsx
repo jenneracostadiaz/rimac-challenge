@@ -3,6 +3,10 @@ import { ArrowLeft } from '../ui/icons/arrow-left.tsx'
 import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
 import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
 import { useState, useEffect } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import 'swiper/css'
 
 interface Plan {
   name: string
@@ -115,33 +119,43 @@ export default function PlansPage() {
       <section className="plans-list" aria-label="Planes disponibles">
         {loading && <div className="plans-list__loading">Cargando planes...</div>}
         {error && <div className="plans-list__error">{error}</div>}
-        <div className="plans-list__grid">
-          {!loading &&
-            !error &&
-            plans.map((plan, idx) => (
-              <article
-                key={plan.name}
-                className={`plan-card${idx === 1 ? ' plan-card--recommended' : ''}`}
-                tabIndex={0}
-                aria-label={plan.name}
-              >
-                {idx === 2 && <div className="plan-card__recommended">Plan recomendado</div>}
-                <div className="plan-card__icon">
-                  <img src="#" alt="" />
-                </div>
-                <h2 className="plan-card__title">{plan.name}</h2>
-                <div className="plan-card__price">
-                  <span className="plan-card__price-label">Costo del plan</span>
-                  <span className="plan-card__price-value">${plan.price} al mes</span>
-                </div>
-                <ul className="plan-card__features">
-                  {plan.description.map((desc: string, i: number) => (
-                    <li key={i}>{desc}</li>
-                  ))}
-                </ul>
-                <button className="plan-card__select">Seleccionar Plan</button>
-              </article>
-            ))}
+        <div className="plans-list__swiper">
+          {!loading && !error && (
+            <Swiper
+              spaceBetween={32}
+              slidesPerView={1.1}
+              breakpoints={{
+                768: { slidesPerView: 3 },
+              }}
+              aria-label="Planes disponibles"
+            >
+              {plans.map((plan, idx) => (
+                <SwiperSlide key={plan.name}>
+                  <article
+                    className={`plan-card${idx === 1 ? ' plan-card--recommended' : ''}`}
+                    tabIndex={0}
+                    aria-label={plan.name}
+                  >
+                    {idx === 1 && <div className="plan-card__recommended">Plan recomendado</div>}
+                    <div className="plan-card__icon">
+                      <img src="#" alt="" />
+                    </div>
+                    <h2 className="plan-card__title">{plan.name}</h2>
+                    <div className="plan-card__price">
+                      <span className="plan-card__price-label">Costo del plan</span>
+                      <span className="plan-card__price-value">${plan.price} al mes</span>
+                    </div>
+                    <ul className="plan-card__features">
+                      {plan.description.map((desc: string, i: number) => (
+                        <li key={i}>{desc}</li>
+                      ))}
+                    </ul>
+                    <button className="plan-card__select">Seleccionar Plan</button>
+                  </article>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </section>
     </main>
