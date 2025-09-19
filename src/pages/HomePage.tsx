@@ -55,6 +55,17 @@ function HomePage() {
     }
 
     setError(null)
+
+    // Guardar los datos del formulario en localStorage
+    localStorage.setItem(
+      'userFormData',
+      JSON.stringify({
+        documentType: formData.documentType,
+        documentNumber: formData.documentNumber,
+        cellphone: formData.cellphone,
+      })
+    )
+
     window.location.assign('/plans')
   }
 
