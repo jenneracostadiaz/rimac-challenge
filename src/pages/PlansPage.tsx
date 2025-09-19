@@ -2,6 +2,8 @@ import './PlansPage.scss'
 import { ArrowLeft } from '../ui/icons/arrow-left.tsx'
 import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
 import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
+import { IcHomeLight } from '../ui/icons/IcHomeLight.tsx'
+import { IcHospitalLight } from '../ui/icons/IcHospitalLight.tsx'
 import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -199,7 +201,11 @@ export default function PlansPage() {
                   >
                     {idx === 1 && <div className="plan-card__recommended">Plan recomendado</div>}
                     <div className="plan-card__icon">
-                      <img src="#" alt="" />
+                      {plan.name === 'Plan en Casa y Clínica' ? (
+                        <IcHospitalLight />
+                      ) : (
+                        <IcHomeLight />
+                      )}
                     </div>
                     <h2 className="plan-card__title">{plan.name}</h2>
                     <div className="plan-card__price">
