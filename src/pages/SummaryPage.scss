@@ -1,0 +1,131 @@
+@import '../styles/vars/colors';
+@import '../styles/vars/typography';
+@import '../styles/vars/mediaqueries';
+
+.summary-page {
+  background: $neutrals-100;
+  min-height: calc(100vh - (60px + 153px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include tablet {
+    min-height: calc(100vh - (71.5px + 102.25px));
+  }
+}
+
+.summary-content {
+  width: 90%;
+  max-width: $tablet;
+  margin: 2rem auto 0;
+  padding: 0 2.4rem;
+}
+
+.summary-title {
+  color: $neutrals-700;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.2px;
+  margin: 0 0 3.2rem 0;
+
+  @include tablet {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.6px;
+    text-align: center;
+  }
+}
+
+.summary-card {
+  background: $white;
+  border-radius: 24px;
+  box-shadow: 0 1px 32px 0 rgba(174, 172, 243, 0.35);
+  padding: 3.2rem 2.4rem;
+
+  @include tablet {
+    padding: 4.8rem 4rem;
+  }
+}
+
+.summary-section {
+  margin-bottom: 3.2rem;
+
+  &__label {
+    color: $neutrals-700;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 16px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin: 0 0 0.8rem 0;
+  }
+}
+
+.summary-user {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__name {
+    color: $neutrals-700;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.2px;
+  }
+}
+
+.summary-details {
+  border-top: 1px solid $neutrals-400;
+  padding-top: 2.4rem;
+}
+
+.summary-field {
+  margin-bottom: 2.4rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__label {
+    color: $neutrals-700;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    margin: 0 0 0.4rem 0;
+  }
+
+  &__value {
+    color: $neutrals-700;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0.4rem;
+    }
+  }
+}
+
+.summary-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $neutrals-600;
+  font-size: 16px;
+  margin: 2rem 0;
+}
