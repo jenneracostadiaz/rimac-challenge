@@ -24,8 +24,8 @@ export const IcHospitalLight = ({ ...props }) => (
         y2="26.911"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.35" stop-color="#F7052D" />
-        <stop offset="0.85" stop-color="#CA5AFA" />
+        <stop offset="0.35" stopColor="#F7052D" />
+        <stop offset="0.85" stopColor="#CA5AFA" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_12_156455"
@@ -35,8 +35,8 @@ export const IcHospitalLight = ({ ...props }) => (
         y2="61.7929"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.272135" stop-color="#34263B" />
-        <stop offset="0.658079" stop-color="#13172C" />
+        <stop offset="0.272135" stopColor="#34263B" />
+        <stop offset="0.658079" stopColor="#13172C" />
       </linearGradient>
     </defs>
   </svg>
