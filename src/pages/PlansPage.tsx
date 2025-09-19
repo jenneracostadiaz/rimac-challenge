@@ -180,7 +180,6 @@ export default function PlansPage() {
         </div>
       </section>
       <section className="plans-list" aria-label="Planes disponibles">
-        {(loading || userLoading) && <div className="plans-list__loading">Cargando planes...</div>}
         {(error || userError) && <div className="plans-list__error">{error || userError}</div>}
         <div className="plans-list__swiper">
           {shouldShowPlans && !loading && !error && !userLoading && !userError && (
@@ -214,7 +213,7 @@ export default function PlansPage() {
                       <span className="plan-card__price-label">Costo del plan</span>
                       {selectedOption === 'forSomeoneElse' && (
                         <span className="plan-card__price-discount">
-                          <s>${plan.price.toFixed(2)}</s>
+                          <s>${plan.price.toFixed(2)} antes</s>
                         </span>
                       )}
                       <span className="plan-card__price-value">${getPlanPrice(plan)} al mes</span>
