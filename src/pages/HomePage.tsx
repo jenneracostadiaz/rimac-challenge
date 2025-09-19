@@ -182,6 +182,7 @@ function HomePage() {
                   className="landing__input"
                   required
                   aria-describedby="cellphone-desc"
+                  maxLength={9}
                 />
                 <span id="cellphone-desc" className="visually-hidden">
                   Ingrese su número de celular
@@ -224,7 +225,6 @@ function HomePage() {
                   <a href="/terminos" className="landing__link">
                     Términos y Condiciones
                   </a>
-                  .
                 </p>
               </div>
 
