@@ -7,14 +7,14 @@
   @include tablet {
     background: $neutrals-200;
   }
-  &.desktop{
+  &.desktop {
     display: none;
     @include tablet {
       width: 100%;
       display: flex;
     }
   }
-  &.mobile{
+  &.mobile {
     display: flex;
     padding: 1.6rem 2.4rem;
     align-items: center;
@@ -24,12 +24,13 @@
     @include tablet {
       display: none;
     }
-
   }
   &__step {
     &.mobile {
       color: $neutrals-700;
-      font-feature-settings: 'liga' off, 'clig' off;
+      font-feature-settings:
+        'liga' off,
+        'clig' off;
       font-size: 1.1rem;
       font-weight: $font-weight-bold;
       letter-spacing: 0.8px;
@@ -67,7 +68,7 @@
     justify-content: center;
     align-items: flex-start;
   }
-  &__item{
+  &__item {
     display: flex;
     align-items: center;
     gap: 1.6rem;
@@ -75,7 +76,7 @@
       color: $neutrals-600;
       letter-spacing: 0.2px;
     }
-    &__circle{
+    &__circle {
       width: 24px;
       height: 24px;
       display: flex;
@@ -89,8 +90,8 @@
       font-weight: $font-weight-bold;
       line-height: 0;
     }
-    &--active{
-      &__circle{
+    &--active {
+      &__circle {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -98,7 +99,7 @@
         width: 24px;
         height: 24px;
         background: $blue-berry;
-        color: $white!important;
+        color: $white !important;
         text-align: center;
         font-size: 1.2rem;
         font-weight: $font-weight-bold;
@@ -110,7 +111,7 @@
       }
     }
 
-    &__dashed{
+    &__dashed {
       display: flex;
       justify-content: center;
       align-items: center;
