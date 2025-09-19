@@ -3,106 +3,25 @@ import { IcProtectionLight } from '../ui/icons/IcProtectionLight.tsx'
 import { IcAddUserLight } from '../ui/icons/IcAddUserLight.tsx'
 import { IcHomeLight } from '../ui/icons/IcHomeLight.tsx'
 import { IcHospitalLight } from '../ui/icons/IcHospitalLight.tsx'
-import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Steps, StepsMobile } from '../components/Steps.tsx'
+import { Back } from '../components/Back.tsx'
+import { useUser } from '../hooks/useUser.ts'
+import { usePlans } from '../hooks/usePlans.ts'
+import { usePlanSelection } from '../hooks/usePlanSelection.ts'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import 'swiper/css'
-import { useNavigate } from 'react-router-dom'
-import { Steps, StepsMobile } from '../components/Steps.tsx'
-import { Back } from '../components/Back.tsx'
-
-interface Plan {
-  name: string
-  price: number
-  description: string[]
-  age: number
-}
-
-interface User {
-  name: string
-  lastName: string
-  birthDay: string
-}
 
 export default function PlansPage() {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
-  const [plans, setPlans] = useState<Plan[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [user, setUser] = useState<User | null>(null)
-  const [userLoading, setUserLoading] = useState(true)
-  const [userError, setUserError] = useState<string | null>(null)
-  const navigate = useNavigate()
-
-  const getAge = (birthDay: string) => {
-    const [day, month, year] = birthDay.split('-').map(Number)
-    const today = new Date()
-    let age = today.getFullYear() - year
-    if (today.getMonth() + 1 < month || (today.getMonth() + 1 === month && today.getDate() < day)) {
-      age--
-    }
-    return age
-  }
-
-  useEffect(() => {
-    setUserLoading(true)
-    fetch('https://rimac-front-end-challenge.netlify.app/api/user.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Error fetching user')
-        return res.json()
-      })
-      .then((data) => {
-        setUser(data)
-        setUserError(null)
-      })
-      .catch(() => {
-        setUserError('No se pudieron cargar los datos del usuario.')
-      })
-      .finally(() => setUserLoading(false))
-  }, [])
-
-  useEffect(() => {
-    setLoading(true)
-    fetch('https://rimac-front-end-challenge.netlify.app/api/plans.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Error fetching plans')
-        return res.json()
-      })
-      .then((data) => {
-        setPlans(data.list)
-        setError(null)
-      })
-      .catch(() => {
-        setError('No se pudieron cargar los planes. Intenta nuevamente.')
-      })
-      .finally(() => setLoading(false))
-  }, [])
+  const { user, userLoading, userError } = useUser()
+  const { plans, loading, error } = usePlans()
+  const { selectedOption, setSelectedOption, getPlanPrice, handleSelectPlan, getFilteredPlans } =
+    usePlanSelection(user)
 
   const shouldShowPlans = selectedOption && user && !userLoading && !userError
-
-  const userAge = user ? getAge(user.birthDay) : null
-  const filteredPlans = userAge !== null ? plans.filter((plan) => userAge <= plan.age) : []
-
-  const getPlanPrice = (plan: Plan) => {
-    if (selectedOption === 'forSomeoneElse') {
-      return (plan.price * 0.95).toFixed(2)
-    }
-    return plan.price.toFixed(2)
-  }
-
-  const handleSelectPlan = (plan: Plan) => {
-    const selectedPlan = {
-      ...plan,
-      finalPrice: getPlanPrice(plan),
-      selectedOption,
-      userName: user?.name,
-      userLastName: user?.lastName,
-      userAge,
-    }
-    localStorage.setItem('selectedPlan', JSON.stringify(selectedPlan))
-    navigate('/summary')
-  }
+  const filteredPlans = getFilteredPlans(plans)
+  const hasAnyError = error || userError
 
   return (
     <main className="plans-main" aria-labelledby="plans-title">
@@ -157,9 +76,9 @@ export default function PlansPage() {
         </div>
       </section>
       <section className="plans-list" aria-label="Planes disponibles">
-        {(error || userError) && <div className="plans-list__error">{error || userError}</div>}
+        {hasAnyError && <div className="plans-list__error">{error || userError}</div>}
         <div className="plans-list__swiper">
-          {shouldShowPlans && !loading && !error && !userLoading && !userError && (
+          {shouldShowPlans && !loading && !hasAnyError && (
             <Swiper
               spaceBetween={16}
               slidesPerView={1.1}
